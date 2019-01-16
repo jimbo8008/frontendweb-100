@@ -79,3 +79,47 @@ describe('object literals', () => {
 
     });
 });
+
+describe('functions', () => {
+    describe('function definitions and literals', () => {
+        it('creating a function', () => {
+            function add(a,b){
+                return a + b;
+            }
+            const answer = add(2,2);
+            expect(answer).toBe(4);
+            
+            //anonymous
+            const answer2 = (function (a,b) {return a -b;})(10,2);
+            expect(answer2).toBe(8);
+            const multiply = function(a,b) {return a * b;};
+            expect(multiply(3,3)).toBe(9);
+
+            //anonymous function w/ a phatt arrow
+            const divide = (a,b) => a/b;
+            expect(divide(10,2)).toBe(5);
+
+            const formatName = (first,last) => {
+                return `${last}, ${first}`
+            };
+            expect(formatName('Han', 'Solo')).toBe('Solo, Han');
+          
+
+        });
+        it('quick example of a high order function', () => {
+            // Dima's code
+            function formatName(first, last, wrapper) {
+            const fullName = `${last}, ${first}`;
+                return wrapper(fullName);
+            }
+             // our code
+            function addStars(name) {
+                return `***${name}***`;
+            }
+            expect(formatName('Luke', 'Skywalker', addStars)).toBe('***Skywalker, Luke***');
+
+            const name = formatName('Jim', 'Mauck', (n) => '     ' + n);
+            expect(name).toBe('     Mauck, Jim');    
+        });
+    });
+});
